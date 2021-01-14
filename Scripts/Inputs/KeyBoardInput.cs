@@ -31,6 +31,12 @@ public class KeyBoardInput : Input_Base
         get { return padalInput; }
     }
 
+    protected float stickyThrottle;
+    public float StickyThrottle
+    {
+        get { return stickyThrottle; }
+    }
+
     #endregion
 
 
@@ -51,6 +57,8 @@ public class KeyBoardInput : Input_Base
         HandleThrottleInput();
         HandleCyclicInput();
         HandleCollectiveInput();
+
+        HandleStickyThrottle();
         
         
     }
@@ -71,6 +79,13 @@ public class KeyBoardInput : Input_Base
     {
         cyclicInput.y = Vertical;
         cyclicInput.x = Horizontal;
+    }
+
+    protected void HandleStickyThrottle()
+    {
+        stickyThrottle += ThrottleInput * Time.deltaTime;
+        stickyThrottle = Mathf.Clamp01(stickyThrottle);
+        //Debug.Log(stickyThrottle);
     }
     #endregion
 }

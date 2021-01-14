@@ -6,8 +6,9 @@ public class HeliEngine : MonoBehaviour
 {
     #region Variable
     public float MaxRPM = 2000f;
-    public float horsePower = 100f;
+    public float MaxhorsePower = 100f;
     public float PowerDelay = 2f;
+    public AnimationCurve powerCurve = new AnimationCurve(new Keyframe(0,0),new Keyframe(1,1));
     #endregion
     #region Properties
     private float currHP;
@@ -31,8 +32,15 @@ public class HeliEngine : MonoBehaviour
 
     #region CustomMethod
     public void UpdateEngine(float throttleinput)
-    {
-
+    {   
+        //calculate HP
+        float wantedHp = powerCurve.Evaluate( throttleinput) * MaxhorsePower; /// we get (- maxhp to maxhp);
+        //Debug.Log(wantedHp);
+        currHP = Mathf.Lerp(currHP, wantedHp, Time.deltaTime * PowerDelay);
+        //Debug.Log(currHP);
+        //calculate RPM
+        float wantedRpm = throttleinput * MaxhorsePower;
+        currRPM = Mathf.Lerp(currRPM, wantedRpm, Time.deltaTime * PowerDelay);
     }
     #endregion
 }

@@ -9,28 +9,35 @@ public class RigidBodyBase : MonoBehaviour
     protected float weight;
     public float WeightInKG = 10f;
     public Transform Cog;
+    [SerializeField]
     protected Rigidbody rb;
 
     #endregion
 
     #region BuildInregion
-    void Start()
+    public virtual void Start()
     {
+       
         weight = WeightInKG;
+        ///Debug.Log("hoi");
         rb = GetComponent<Rigidbody>();
         if(rb)
         {
             rb.mass = weight;
+            
         }
     }
 
 
-    void Update()
+    public virtual void Update()
     {
         if(rb)
         {
+
             HandlePhycics();
         }
+        
+
     }
     #endregion
 

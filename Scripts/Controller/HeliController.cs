@@ -13,15 +13,17 @@ public class HeliController : RigidBodyBase
     #endregion
 
     #region BuildInregion
-    void Start()
+    public override void Start()
     {
+        base.Start();
         input = GetComponent<KeyBoardInput>();
+
     }
 
 
-    void Update()
+    public override void Update()
     {
-
+        base.Update();
     }
     #endregion
 
@@ -32,14 +34,16 @@ public class HeliController : RigidBodyBase
         {
             HandleCharacterstic();
             HandleEngine();
-        }  
+           
+        }
+       
     }
 
     protected virtual void HandleEngine()
     {
         foreach(HeliEngine engine in engines )
         {
-            engine.UpdateEngine(input.ThrottleInput);
+            engine.UpdateEngine(input.StickyThrottle);
         }
     }
 
