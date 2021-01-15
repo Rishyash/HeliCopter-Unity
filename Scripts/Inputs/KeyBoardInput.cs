@@ -11,6 +11,7 @@ public class KeyBoardInput : Input_Base
     #region Properties
     private float throttleInput = 0;
     private float collectiveInput = 0;
+    private float stickycollectiveInput = 0;
     private Vector2 cyclicInput = new Vector2(0,0);
     private float padalInput = 0f;
     public float ThrottleInput
@@ -20,6 +21,10 @@ public class KeyBoardInput : Input_Base
     public float CollectiveInput
     {
         get { return collectiveInput; }
+    }
+    public float StickyCollectiveInput
+    {
+        get { return stickycollectiveInput; }
     }
     public Vector2 CyclicInput
     {
@@ -57,7 +62,7 @@ public class KeyBoardInput : Input_Base
         HandleThrottleInput();
         HandleCyclicInput();
         HandleCollectiveInput();
-
+        HandleStickyCollective();
         HandleStickyThrottle();
         
         
@@ -86,6 +91,13 @@ public class KeyBoardInput : Input_Base
         stickyThrottle += ThrottleInput * Time.deltaTime;
         stickyThrottle = Mathf.Clamp01(stickyThrottle);
         //Debug.Log(stickyThrottle);
+    }
+
+    protected void HandleStickyCollective()
+    {
+        stickycollectiveInput += collectiveInput * Time.deltaTime;
+        stickycollectiveInput = Mathf.Clamp01(stickycollectiveInput);
+        //Debug.Log(stickycollectiveInput);
     }
     #endregion
 }

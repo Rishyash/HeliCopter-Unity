@@ -13,6 +13,7 @@ public class HeliController : RigidBodyBase
     [Header("Rotor Controller")]
     public RotorController rotorCtrl;
     protected KeyBoardInput input;
+    private HeliCharacterstic characterstic;
     #endregion
 
     #region BuildInregion
@@ -20,13 +21,13 @@ public class HeliController : RigidBodyBase
     {
         base.Start();
         input = GetComponent<KeyBoardInput>();
-
+        characterstic = GetComponent<HeliCharacterstic>();
     }
 
 
-    public override void Update()
+    public override void FixedUpdate()
     {
-        base.Update();
+        base.FixedUpdate();
     }
     #endregion
 
@@ -61,7 +62,10 @@ public class HeliController : RigidBodyBase
 
     protected virtual void HandleCharacterstic()
     {
-
+        if(characterstic)
+        {
+            characterstic.UpdateCharacterstic(rb,input);
+        }
     }
     #endregion
 }

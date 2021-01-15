@@ -7,7 +7,7 @@ public class RotorController : MonoBehaviour
 {
     #region Variable
     public List<RotorInterface> rotors = new List<RotorInterface>();
-    public float dps;
+    public float maxdps;
     #endregion
 
     #region BuildInregion
@@ -29,8 +29,8 @@ public class RotorController : MonoBehaviour
         //Debug.Log("ROTOR");
         //Debug.Log(currentRPM);
         //Dergree Per Sec
-         dps = (  (currentRPM * 360f) / 60f) * Time.deltaTime;
-
+         float dps = (  (currentRPM * 360f) / 60f) ;
+           dps = Mathf.Clamp(dps, 0, maxdps);
         //Update Rotor
         foreach(var rotor in rotors)
         {

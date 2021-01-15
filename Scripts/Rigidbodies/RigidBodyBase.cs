@@ -29,7 +29,7 @@ public class RigidBodyBase : MonoBehaviour
     }
 
 
-    public virtual void Update()
+    public virtual void FixedUpdate()
     {
         if(rb)
         {
