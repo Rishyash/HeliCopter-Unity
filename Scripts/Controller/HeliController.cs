@@ -9,6 +9,9 @@ public class HeliController : RigidBodyBase
     #region Variable
     [Header("Helicopter  Properties")]
     public List<HeliEngine> engines = new List<HeliEngine>();
+
+    [Header("Rotor Controller")]
+    public RotorController rotorCtrl;
     protected KeyBoardInput input;
     #endregion
 
@@ -34,6 +37,7 @@ public class HeliController : RigidBodyBase
         {
             HandleCharacterstic();
             HandleEngine();
+            HandleRotor();
            
         }
        
@@ -44,6 +48,14 @@ public class HeliController : RigidBodyBase
         foreach(HeliEngine engine in engines )
         {
             engine.UpdateEngine(input.StickyThrottle);
+        }
+    }
+
+    protected virtual void HandleRotor()
+    {
+        if(rotorCtrl)
+        {
+            rotorCtrl.UpdateRotors(input, engines[0].CurrRPM);
         }
     }
 

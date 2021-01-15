@@ -39,7 +39,7 @@ public class HeliEngine : MonoBehaviour
         currHP = Mathf.Lerp(currHP, wantedHp, Time.deltaTime * PowerDelay);
         //Debug.Log(currHP);
         //calculate RPM
-        float wantedRpm = throttleinput * MaxhorsePower;
+        float wantedRpm = throttleinput * MaxRPM;
         currRPM = Mathf.Lerp(currRPM, wantedRpm, Time.deltaTime * PowerDelay);
     }
     #endregion
